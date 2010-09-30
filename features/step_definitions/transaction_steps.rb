@@ -24,3 +24,19 @@ end
 Given /^I have sales tax at ([\d\.]+)%$/ do |tax_rate|
   @transaction.tax_rate = tax_rate
 end
+
+When /^I have a discount of "([-\d\.]+)%"$/ do |discount|
+  @transaction.discount = discount
+end
+
+Given /^I have a 'buy 2 get 1 free' deal for "([^\"]*)"$/ do |description|
+  @transaction.discount = "33.33"
+end
+
+When /^I add another "([^\"]*)" at \$(\d+\.\d+)$/ do |description, amount|
+  @transaction.add(description, amount)
+end
+
+Given /^I am a kid$/ do
+  @transaction.customer_is_a_kid
+end
