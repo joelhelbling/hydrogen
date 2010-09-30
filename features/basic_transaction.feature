@@ -23,7 +23,7 @@ Feature: A basic transaction
 
   Scenario: Lots of items, 7.5% tax
     Given I add the following items:
-      | DESCRIPTION            | AMOUNT  |
+      | DESCRIPTION            | PRICE   |
       | white flange           | $109.95 |
       | hexigonal bushing      |   $0.29 |
       | flexible washer washer |  $24.99 |

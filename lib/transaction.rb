@@ -6,16 +6,19 @@ class Transaction
     @customer_is_a_kid = false
   end
 
-  def add(description, amount)
+  def add(line_item)
     @items ||= []
-    @items << {:description => description, :amount => Float(amount)}
+    @items << line_item
   end
 
   def total
     return 0.00 if @customer_is_a_kid
+    @items.each do |item|
+      item.run(@items) if item.respond_to? :run
+    end
     pre_tax_total =
     @items.inject(0) do |sum, item|
-      sum += item[:amount]
+      sum += item.amount || 0.00
     end
     total = pre_tax_total + (pre_tax_total * @tax_percentage)
 

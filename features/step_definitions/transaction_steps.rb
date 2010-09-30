@@ -3,13 +3,13 @@ Given /^I have a transaction$/ do
 end
 
 Given /^I add "([^"]*)" at \$(\d+\.\d+)$/ do |description, amount|
-  @transaction.add(description, amount)
+  @transaction.add Item.new(:description => description, :amount => amount)
 end
 
 Given /^I add the following items:$/ do |table|
   table.hashes.each do |hash|
-    amount = hash['AMOUNT'].gsub(/\$/, "")
-    Given "I add \"#{hash['DESCRIPTION']}\" at $#{amount}"
+    price = hash['PRICE'].gsub(/\$/, "")
+    Given "I add \"#{hash['DESCRIPTION']}\" at $#{price}"
   end
 end
 
@@ -34,7 +34,7 @@ Given /^I have a 'buy 2 get 1 free' deal for "([^\"]*)"$/ do |description|
 end
 
 When /^I add another "([^\"]*)" at \$(\d+\.\d+)$/ do |description, amount|
-  @transaction.add(description, amount)
+  When "I add \"#{description}\" at $#{amount}"
 end
 
 Given /^I am a kid$/ do

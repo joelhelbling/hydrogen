@@ -1,4 +1,3 @@
-@wip
 Feature: A discount transaction
 
   Background: stuff we generally always do
