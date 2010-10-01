@@ -19,3 +19,4 @@ upon the entire set of items in the transaction.
     And I add a deal 'one cent off for each item'
     When I view the total
     Then I see $1.98
+

@@ -13,4 +13,9 @@ class Deal
   def run(items)
     @amount = @logic.call(items) if @logic
   end
+
+  def quantity
+    1
+  end
+
 end

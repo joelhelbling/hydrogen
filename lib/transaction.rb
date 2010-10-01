@@ -8,7 +8,13 @@ class Transaction
 
   def add(line_item)
     @items ||= []
-    @items << line_item
+    @items.each do |item|
+      if items_identical?(item, line_item)
+        item.quantity += line_item.quantity
+        line_item = nil
+      end
+    end
+    @items << line_item if line_item
   end
 
   def total
@@ -18,7 +24,7 @@ class Transaction
     end
     pre_tax_total =
     @items.inject(0) do |sum, item|
-      sum += item.amount || 0.00
+      sum += (item.amount * item.quantity) || 0.00
     end
     total = pre_tax_total + (pre_tax_total * @tax_percentage)
 
@@ -38,7 +44,17 @@ class Transaction
     @customer_is_a_kid = true
   end
 
+  def line_items
+    @items + [{:description => "sales tax at #{@tax_percentage * 100}%"}]
+  end
+
   private
+
+  def items_identical?(item1, item2)
+    item1.description.eql?(item2.description) &&
+      item1.id == item2.id &&
+      item1.amount == item2.amount
+  end
 
   def round(number)
     (number * 100).round.to_f / 100

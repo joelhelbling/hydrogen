@@ -40,3 +40,11 @@ end
 Given /^I am a kid$/ do
   @transaction.customer_is_a_kid
 end
+
+When /^I count the number of line items$/ do
+  @line_items_count = @transaction.line_items.size
+end
+
+Then /^I see "([^"]*)" line items$/ do |number_of_line_items|
+  @line_items_count.should == number_of_line_items.to_i
+end
