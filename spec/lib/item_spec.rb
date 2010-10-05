@@ -8,6 +8,7 @@ describe Item do
     it { should respond_to(:description, :description=) }
     it { should respond_to(:amount, :amount=) }
     it { should respond_to(:quantity, :quantity=) }
+    it { should be_salable }
     it 'should default to quantity of 1' do
       subject.quantity.should == 1
     end

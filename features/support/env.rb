@@ -1,3 +1,5 @@
-require 'lib/transaction'
-require 'lib/item'
-require 'lib/deal'
+lib = "#{File.dirname(__FILE__)}/../../lib"
+require "#{lib}/transaction"
+require "#{lib}/item"
+require "#{lib}/deal"
+require "#{lib}/sales_tax"

@@ -38,21 +38,19 @@ Feature: A basic transaction
     And I add "whistle" at $2.50
     And I have sales tax at 2%
     When I count the number of line items
-    Then I see "3" line items
+    Then I see "2" line items
 
   Scenario: duplicate items should be collapsed into a single line item
     Given I add "inkpot" at $2.00
     And I add another "inkpot" at $2.00
-    And I have sales tax at 0%
     When I count the number of line items
-    Then I see "2" line items
+    Then I see "1" line items
 
   Scenario: duplicate items should increment the quantity for their line item
     Given I add "lone sock" at $2.00
     And I add another "lone sock" at $2.00
     And I add another "lone sock" at $2.00
-    And I have sales tax at 0%
     When I view the total
     And I count the number of line items
     Then I see $6.00
-    And I see "2" line items
+    And I see "1" line items

@@ -8,8 +8,16 @@ class Item
     @description = p[:description]
   end
 
+  def amount
+    @amount
+  end
+
   def amount=(amount)
     @amount = amount.to_f
+  end
+
+  def salable?
+    true
   end
 
 end

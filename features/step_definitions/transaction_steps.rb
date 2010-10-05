@@ -22,11 +22,7 @@ Then /^I see \$(\d+\.\d+)$/ do |total_amount|
 end
 
 Given /^I have sales tax at ([\d\.]+)%$/ do |tax_rate|
-  @transaction.tax_rate = tax_rate
-end
-
-When /^I have a discount of "([-\d\.]+)%"$/ do |discount|
-  @transaction.discount = discount
+  @transaction.sales_tax = SalesTax.new(tax_rate.to_f/100)
 end
 
 Given /^I have a 'buy 2 get 1 free' deal for "([^\"]*)"$/ do |description|
@@ -46,5 +42,8 @@ When /^I count the number of line items$/ do
 end
 
 Then /^I see "([^"]*)" line items$/ do |number_of_line_items|
+  @transaction.line_items.each do |item|
+    puts "#{item.description}, qty: #{item.quantity}"
+  end
   @line_items_count.should == number_of_line_items.to_i
 end

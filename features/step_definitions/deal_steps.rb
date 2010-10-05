@@ -5,12 +5,9 @@ end
 Given /^I add a deal 'one cent off for each item'$/ do
   deal = Deal.new(:description => '1 cent off each item')
   deal.logic do |items|
-    amount = 
-    items.inject(0) do |sum, item|
-      qty = item.kind_of?(Item) && item.quantity ? item.quantity : 0
-      sum += qty * -0.01
+    items.select{|i| i.salable?}.inject(0) do |sum, item|
+      sum += item.quantity * -0.01
     end
-    amount
   end
   @transaction.add deal
 end

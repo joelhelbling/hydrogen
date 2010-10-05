@@ -1,19 +1,17 @@
-require 'lib/deal'
+require 'spec'
+lib = "#{File.dirname(__FILE__)}/../../lib"
+require "#{lib}/deal"
 
 describe Deal do
   context :new do
     it { should respond_to(:description, :description=) }
     it { should respond_to(:amount, :amount=) }
     it { should respond_to(:logic) }
-    it { should respond_to(:run) }
-    it { should respond_to(:quantity) }
+    it { should respond_to(:calculate) }
+    it { should_not be_salable }
     specify 'amount should be a float'  do
       subject.amount.should be_instance_of(Float)
     end
-    specify 'quantity should always be 1' do
-      subject.quantity.should == 1
-    end
-
   end
 
   context 'initialize with parameters' do

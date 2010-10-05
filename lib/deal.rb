@@ -10,12 +10,12 @@ class Deal
     @logic = block
   end
 
-  def run(items)
+  def calculate(items)
     @amount = @logic.call(items) if @logic
   end
 
-  def quantity
-    1
+  def salable?
+    false
   end
 
 end
