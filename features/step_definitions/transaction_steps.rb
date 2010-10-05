@@ -42,8 +42,5 @@ When /^I count the number of line items$/ do
 end
 
 Then /^I see "([^"]*)" line items$/ do |number_of_line_items|
-  @transaction.line_items.each do |item|
-    puts "#{item.description}, qty: #{item.quantity}"
-  end
   @line_items_count.should == number_of_line_items.to_i
 end
